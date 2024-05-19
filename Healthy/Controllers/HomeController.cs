@@ -15,7 +15,24 @@ namespace Healthy.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Entries");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public IActionResult Foods()
+        {
             return View();
+        }
+
+        public IActionResult History()
+        {
+            return RedirectToAction("History", "Entries");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
