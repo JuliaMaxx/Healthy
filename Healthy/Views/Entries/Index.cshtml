@@ -2,7 +2,17 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    /// Filter entries where Ate checkbox is checked
+    var ateEntries = Model.Where(item => item.Ate);
+
+    // Calculate totals for the filtered entries
+    var totalCalories = ateEntries.Sum(item => item.Food.Calories * item.Quantity);
+    var totalFats = ateEntries.Sum(item => item.Food.Fat * item.Quantity);
+    var totalCarbs = ateEntries.Sum(item => item.Food.Carbs * item.Quantity);
+    var totalProtein = ateEntries.Sum(item => item.Food.Protein * item.Quantity);
 }
+
 
 <h1>Today's Entries</h1>
 
@@ -59,16 +69,16 @@
                     </form>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Food.Calories)
+                    @(item.Food.Calories * item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Food.Fat)
+                    @(item.Food.Fat * item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Food.Carbs)
+                    @(item.Food.Carbs * item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Food.Protein)
+                    @(item.Food.Protein * item.Quantity)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -78,6 +88,16 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">Totals</td>
+            <td>@totalCalories</td>
+            <td>@totalFats</td>
+            <td>@totalCarbs</td>
+            <td>@totalProtein</td>
+            <td></td>
+        </tr>
+    </tfoot>
 </table>
 
 
