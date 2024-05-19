@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Healthy.Data;
 using Healthy.Models;
+using System.Diagnostics;
+using System.Security.Claims;
 
-namespace Healthy.Controllers
+namespace GetHealthy.Controllers
 {
+    [Authorize]
     public class EntriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,13 +21,19 @@ namespace Healthy.Controllers
         }
 
         // GET: Entries
+        [Authorize]
+
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Entry.Include(e => e.Food).Include(e => e.User);
+            var today = DateTime.Today;
+            var currentUserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var applicationDbContext = _context.Entry.Include(e => e.Food).Include(e => e.User).Where(e => e.IntakeTime.Date == today).Where(e => e.IdentityUserId == currentUserID);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Entries/Details/5
+        [Authorize]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,10 +54,11 @@ namespace Healthy.Controllers
         }
 
         // GET: Entries/Create
+        [Authorize]
+
         public IActionResult Create()
         {
-            ViewData["FoodId"] = new SelectList(_context.Food, "Id", "IdentityUserId");
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            PopulateSelectLists();
             return View();
         }
 
@@ -59,20 +67,27 @@ namespace Healthy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,MealType,Ate,Quantity,FoodId,IntakeTime,IdentityUserId")] Entry entry)
+        public async Task<IActionResult> Create([Bind("Id,Name,MealType,Ate,Quantity,FoodId,IntakeTime")] Entry entry)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(entry);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FoodId"] = new SelectList(_context.Food, "Id", "IdentityUserId", entry.FoodId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", entry.IdentityUserId);
-            return View(entry);
+            entry.IdentityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            entry.IntakeTime = DateTime.Today.Add(entry.IntakeTime.TimeOfDay);
+            entry.Name = "Intake";
+
+            _context.Add(entry);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        private void PopulateSelectLists(object selectedFood = null)
+        {
+            var foodsQuery = from f in _context.Food
+                             orderby f.Name
+                             select f;
+            ViewBag.FoodList = new SelectList(foodsQuery.AsNoTracking(), "Id", "Name", selectedFood);
         }
 
         // GET: Entries/Edit/5
+        [Authorize]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,12 +96,11 @@ namespace Healthy.Controllers
             }
 
             var entry = await _context.Entry.FindAsync(id);
-            if (entry == null)
-            {
-                return NotFound();
-            }
-            ViewData["FoodId"] = new SelectList(_context.Food, "Id", "IdentityUserId", entry.FoodId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", entry.IdentityUserId);
+            entry.IdentityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            entry.IntakeTime = DateTime.Today.Add(entry.IntakeTime.TimeOfDay);
+            entry.Name = "Intake";
+
+            PopulateSelectLists(entry.FoodId);
             return View(entry);
         }
 
@@ -101,33 +115,32 @@ namespace Healthy.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            entry.IdentityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            entry.Name = "Intake";
+            entry.IntakeTime = DateTime.Today.Add(entry.IntakeTime.TimeOfDay);
+            try
             {
-                try
-                {
-                    _context.Update(entry);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EntryExists(entry.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(entry);
+                await _context.SaveChangesAsync();
             }
-            ViewData["FoodId"] = new SelectList(_context.Food, "Id", "IdentityUserId", entry.FoodId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", entry.IdentityUserId);
-            return View(entry);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EntryExists(entry.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Entries/Delete/5
+        [Authorize]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -160,6 +173,20 @@ namespace Healthy.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Entries/History
+        [Authorize]
+
+        public async Task<IActionResult> History()
+        {
+            var currentUserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var applicationDbContext = _context.Entry
+            .Include(e => e.Food)
+            .Include(e => e.User)
+            .Where(e => e.IdentityUserId == currentUserID);
+
+            return View(await applicationDbContext.ToListAsync());
         }
 
         private bool EntryExists(int id)

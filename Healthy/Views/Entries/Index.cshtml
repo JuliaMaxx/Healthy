@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Today's Entries</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,59 +13,69 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Food
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MealType)
+                Meal Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ate)
+                Quantity
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
+                Ate
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Food)
+                Calories
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IntakeTime)
+                Fats
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                Carbs
+            </th>
+            <th>
+                Protein
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MealType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Food.IdentityUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IntakeTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MealType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.Calories)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.Fat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.Carbs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.Protein)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+
