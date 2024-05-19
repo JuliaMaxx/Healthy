@@ -2,6 +2,15 @@
 
 @{
     ViewData["Title"] = "History";
+
+    /// Filter entries where Ate checkbox is checked
+    var ateEntries = Model.Where(item => item.Ate);
+
+    // Calculate totals for the filtered entries
+    var totalCalories = ateEntries.Sum(item => item.Food.Calories * item.Quantity);
+    var totalFats = ateEntries.Sum(item => item.Food.Fat * item.Quantity);
+    var totalCarbs = ateEntries.Sum(item => item.Food.Carbs * item.Quantity);
+    var totalProtein = ateEntries.Sum(item => item.Food.Protein * item.Quantity);
 }
 
 <h1>History</h1>
@@ -31,10 +40,10 @@
                     <td>@Html.DisplayFor(modelItem => item.MealType)</td>
                     <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                     <td>@Html.DisplayFor(modelItem => item.Ate)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Food.Calories)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Food.Fat)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Food.Carbs)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Food.Protein)</td>
+                    <td>@(item.Food.Calories * item.Quantity)</td>
+                    <td>@(item.Food.Fat * item.Quantity)</td>
+                    <td>@(item.Food.Carbs * item.Quantity)</td>
+                    <td>@(item.Food.Protein * item.Quantity)</td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
@@ -43,5 +52,15 @@
                 </tr>
             }
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">Totals</td>
+                <td>@totalCalories</td>
+                <td>@totalFats</td>
+                <td>@totalCarbs</td>
+                <td>@totalProtein</td>
+                <td></td>
+            </tr>
+        </tfoot>
     </table>
 }
