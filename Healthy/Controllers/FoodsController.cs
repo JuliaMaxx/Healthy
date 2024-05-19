@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Healthy.Data;
 using Healthy.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+//using GetHealthy.Data.Migrations;
 
-namespace Healthy.Controllers
+namespace GetHealthy.Controllers
 {
     public class FoodsController : Controller
     {
@@ -20,13 +23,16 @@ namespace Healthy.Controllers
         }
 
         // GET: Foods
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Food.Include(f => f.User);
+            var currentUserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var applicationDbContext = _context.Food.Include(e => e.User).Where(e => e.IdentityUserId == currentUserID);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Foods/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,7 +41,7 @@ namespace Healthy.Controllers
             }
 
             var food = await _context.Food
-                .Include(f => f.User)
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (food == null)
             {
@@ -46,9 +52,9 @@ namespace Healthy.Controllers
         }
 
         // GET: Foods/Create
+        [Authorize]
         public IActionResult Create()
         {
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -57,32 +63,29 @@ namespace Healthy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Reference,Calories,Fat,Carbs,Protein,IdentityUserId")] Food food)
+        public async Task<IActionResult> Create([Bind("Id,Name,Reference,Calories,Fat,Carbs,Protein")] Food food)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(food);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", food.IdentityUserId);
-            return View(food);
+            food.IdentityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            _context.Add(food);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Foods/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
             var food = await _context.Food.FindAsync(id);
+            food.IdentityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (food == null)
             {
                 return NotFound();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", food.IdentityUserId);
             return View(food);
         }
 
@@ -91,38 +94,35 @@ namespace Healthy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Reference,Calories,Fat,Carbs,Protein,IdentityUserId")] Food food)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Reference,Calories,Fat,Carbs,Protein")] Food food)
         {
             if (id != food.Id)
             {
                 return NotFound();
             }
+            food.IdentityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(food);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FoodExists(food.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(food);
+                await _context.SaveChangesAsync();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", food.IdentityUserId);
-            return View(food);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FoodExists(food.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Foods/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,7 +131,7 @@ namespace Healthy.Controllers
             }
 
             var food = await _context.Food
-                .Include(f => f.User)
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (food == null)
             {
