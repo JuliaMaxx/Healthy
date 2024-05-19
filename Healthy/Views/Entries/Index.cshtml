@@ -12,13 +12,13 @@
     var totalCarbs = ateEntries.Sum(item => item.Food.Carbs * item.Quantity);
     var totalProtein = ateEntries.Sum(item => item.Food.Protein * item.Quantity);
 }
-
-
+<div class="head">
 <h1>Today's Entries</h1>
-
-<p>
+<p class="createButton">
     <a asp-action="Create">Create New</a>
 </p>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -99,6 +99,4 @@
         </tr>
     </tfoot>
 </table>
-
-
 

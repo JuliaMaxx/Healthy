@@ -1,0 +1,52 @@
+﻿body {
+    color: Black;
+    background-color: #F6EE8D;
+}
+/* HEAD */
+.head {
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.head h1 {
+    /*font-family: "Blank's Script Personal Use";*/
+    font-family: "Anordighos";
+    font-size: 80px;
+}
+.createButton a {
+    background-color: #B582F7;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.createButton a:hover
+.createButton a:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+}
+@media (min-width: 768px) {
+    .createButton a {
+        min-width: 120px;
+        padding: 0 25px;*/
+    }
+}
+/* TABLE */
+.table tr {
+    padding-bottom: 4px;
+    padding-top: 4px;
+    border-top: solid 2px #B582F7;
+    border-bottom: solid 2px #B582F7;
+}
