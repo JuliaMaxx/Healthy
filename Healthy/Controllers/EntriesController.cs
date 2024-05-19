@@ -174,7 +174,21 @@ namespace GetHealthy.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        [HttpPost]
+        public async Task<IActionResult> ToggleAte(int id, bool ate)
+        {
+            var entry = await _context.Entry.FindAsync(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
 
+            entry.Ate = ate;
+            _context.Update(entry);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
         // GET: Entries/History
         [Authorize]
 

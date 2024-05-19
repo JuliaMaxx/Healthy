@@ -53,7 +53,10 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Ate)
+                    <form asp-action="ToggleAte" method="post" id="form-@item.Id">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="checkbox" name="ate" value="true" @(item.Ate ? "checked" : "") onchange="document.getElementById('form-@item.Id').submit();" />
+                    </form>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Food.Calories)
