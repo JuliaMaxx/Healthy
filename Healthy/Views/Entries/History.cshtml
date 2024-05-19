@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Healthy.Models.Entry>
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<h1>History</h1>
+
+@foreach (var group in Model.GroupBy(e => e.IntakeTime.Date).OrderByDescending(g => g.Key))
+{
+    <h2>@group.Key.ToString("D")</h2> <!-- Display the date as a heading -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Food</th>
+                <th>Meal Type</th>
+                <th>Quantity</th>
+                <th>Ate</th>
+                <th>Calories</th>
+                <th>Fats</th>
+                <th>Carbs</th>
+                <th>Protein</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in group)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Food.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MealType)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Ate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Food.Calories)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Food.Fat)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Food.Carbs)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Food.Protein)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
