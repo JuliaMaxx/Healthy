@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "History";
 
+}
+<div class="head">
+    <h1>History</h1>
+</div>
+
+@foreach (var group in Model.GroupBy(e => e.IntakeTime.Date).OrderByDescending(g => g.Key))
+{
     /// Filter entries where Ate checkbox is checked
     var ateEntries = Model.Where(item => item.Ate);
 
@@ -11,13 +18,7 @@
     var totalFats = ateEntries.Sum(item => item.Food.Fat * item.Quantity);
     var totalCarbs = ateEntries.Sum(item => item.Food.Carbs * item.Quantity);
     var totalProtein = ateEntries.Sum(item => item.Food.Protein * item.Quantity);
-}
-<div class="head">
-    <h1>History</h1>
-</div>
 
-@foreach (var group in Model.GroupBy(e => e.IntakeTime.Date).OrderByDescending(g => g.Key))
-{
     <h2 class="dates">@group.Key.ToString("D")</h2> <!-- Display the date as a heading -->
     <table class="table">
         <thead>
@@ -46,9 +47,6 @@
                     <td class="values">@(item.Food.Carbs * item.Quantity)</td>
                     <td class="values">@(item.Food.Protein * item.Quantity)</td>
                     <td class="tableButtons">
-                        <b>
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                            </b>
                     </td>
                 </tr>
             }
