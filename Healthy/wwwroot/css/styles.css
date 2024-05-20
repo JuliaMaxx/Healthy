@@ -121,6 +121,11 @@ footer {
     font-family: "Love Ya Like A Sister", cursive;
     color: #002b59;
 }
-.row {
-    justify-content: center;
+/*.row {*/
+/*    justify-content: center;
+}*/
+/* DETAILS */
+.detailsList {
+    font-family: "Love Ya Like A Sister", cursive !important;
+
 }
