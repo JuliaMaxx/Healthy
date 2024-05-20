@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="head">
+    <h1>Details</h1>
+</div>
 
-<h1>Details</h1>
-
-<div>
-    <h4>Food</h4>
+<div class="detailsList">
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -54,7 +54,7 @@
         </dd>
     </dl>
 </div>
-<div>
+<div class="tableButtons">
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
