@@ -16,15 +16,19 @@ namespace Healthy.Models
         public string Reference { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Calories must be a positive value.")]
         public double Calories { get; set; }
 
         [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "Fat must be a non-negative value.")]
         public double Fat { get; set; }
 
         [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "Carbs must be a non-negative value.")]
         public double Carbs { get; set; }
 
         [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "Protein must be a non-negative value.")]
         public double Protein { get; set; }
 
         [Required]

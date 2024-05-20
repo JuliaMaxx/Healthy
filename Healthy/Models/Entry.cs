@@ -13,6 +13,8 @@ namespace Healthy.Models
         [Display(Name = "Meal Type")]
         public MealType? MealType { get; set; }
         public bool Ate { get; set; }
+
+        [Range(1, double.MaxValue, ErrorMessage = "Quantity must be a non-negative value.")]
         public int Quantity { get; set; }
 
         [Required]
