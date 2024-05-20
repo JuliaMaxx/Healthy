@@ -96,3 +96,21 @@ footer {
     text-align: center;
     color: black;
 }
+/* EDIT */
+.saveButton {
+    padding: 15px;
+    text-align: center;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #B582F7;
+    border-color: #8D3FF3;
+    width: 200px;
+}
+.form-group {
+    font-family: "Love Ya Like A Sister", cursive;
+    color: #002b59;
+}
+.row {
+    justify-content: center;
+}
