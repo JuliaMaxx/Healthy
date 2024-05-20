@@ -21,14 +21,19 @@ namespace Healthy.Data
                 .HasOne(e => e.Food)
                 .WithMany()
                 .HasForeignKey(e => e.FoodId)
-                .OnDelete(DeleteBehavior.Cascade); // Use appropriate delete behavior
-
+                .OnDelete(DeleteBehavior.Restrict); 
             // Define the relationship between Entry and IdentityUser
             modelBuilder.Entity<Entry>()
                 .HasOne(e => e.User)
                 .WithMany()
                 .HasForeignKey(e => e.IdentityUserId)
-                .OnDelete(DeleteBehavior.Restrict); // Use appropriate delete behavior
+                .OnDelete(DeleteBehavior.Cascade); 
+
+            modelBuilder.Entity<Food>()
+                .HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.IdentityUserId)
+                .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 

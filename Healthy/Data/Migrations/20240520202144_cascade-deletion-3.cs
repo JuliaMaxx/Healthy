@@ -4,39 +4,37 @@
 
 namespace Healthy.Data.Migrations
 {
-    /// <inheritdoc />
-    public partial class Entryupdate : Migration
+    public partial class cascadedeletion3 : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Entry_AspNetUsers_IdentityUserId",
+                name: "FK_Entry_Food_FoodId",
                 table: "Entry");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Entry_AspNetUsers_IdentityUserId",
+                name: "FK_Entry_Food_FoodId",
                 table: "Entry",
-                column: "IdentityUserId",
-                principalTable: "AspNetUsers",
+                column: "FoodId",
+                principalTable: "Food",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Entry_AspNetUsers_IdentityUserId",
+                name: "FK_Entry_Food_FoodId",
                 table: "Entry");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Entry_AspNetUsers_IdentityUserId",
+                name: "FK_Entry_Food_FoodId",
                 table: "Entry",
-                column: "IdentityUserId",
-                principalTable: "AspNetUsers",
+                column: "FoodId",
+                principalTable: "Food",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
     }
+
 }

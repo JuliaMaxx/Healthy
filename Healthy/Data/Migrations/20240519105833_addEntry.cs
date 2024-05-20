@@ -39,7 +39,7 @@ namespace Healthy.Data.Migrations
                         column: x => x.FoodId,
                         principalTable: "Food",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

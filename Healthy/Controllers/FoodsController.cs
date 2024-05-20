@@ -149,6 +149,8 @@ namespace GetHealthy.Controllers
             var food = await _context.Food.FindAsync(id);
             if (food != null)
             {
+                var relatedEntries = _context.Entry.Where(e => e.FoodId == id);
+                _context.Entry.RemoveRange(relatedEntries);
                 _context.Food.Remove(food);
             }
 

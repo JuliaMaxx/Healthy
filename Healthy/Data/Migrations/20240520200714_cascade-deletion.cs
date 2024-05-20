@@ -5,7 +5,7 @@
 namespace Healthy.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Entryupdate : Migration
+    public partial class cascadedeletion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
