@@ -1,5 +1,4 @@
 ﻿body {
-    color: Black;
     background-color: #F6EE8D;
 }
 /* HEAD */
@@ -11,6 +10,8 @@
 }
     .head h1 {
         font-size: 80px;
+        font-family: "Love Ya Like A Sister", cursive;
+        color: #002b59;
     }
 .createButton a {
     background-color: #B582F7;
@@ -42,9 +43,25 @@
     }
 }
 /* TABLE */
+.table {
+    font-family: "Love Ya Like A Sister", cursive;
+    color: #002b59;
+}
 .table tr {
     padding-bottom: 4px;
     padding-top: 4px;
     border-top: solid 2px #B582F7;
     border-bottom: solid 2px #B582F7;
+}
+.tableButtons a {
+    display: inline-block;
+    padding-left:10px;
+    padding-right:10px;
+    text-decoration: none;
+    color: #002b59;
+}
+.tableButtons a:hover{
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+    color: #272727;
 }
