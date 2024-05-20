@@ -2,13 +2,13 @@
     box-shadow: black 15px 15px inset;
     font-family: "Love Ya Like A Sister", cursive !important;
 }
-.container-fluid a{
+.container-fluid a {
     padding-left: 15px;
     padding-right: 15px;
+    transition: all 0.3s ease;
 }
 .container-fluid a:hover {
     transform: scale(1.1);
-    transition: all 0.3s ease;
 }
 .navbar-collapse {
     display: flex;
@@ -46,6 +46,7 @@ body {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    transition: all 0.3s ease;
 }
 .createButton a:hover,
 .createButton a:active {
@@ -81,10 +82,10 @@ body {
     padding-right: 10px;
     text-decoration: none;
     color: #002b59;
+    transition: all 0.3s ease;
 }
 .tableButtons a:hover{
     transform: scale(1.2);
-    transition: all 0.3s ease;
     color: #272727;
 }
 .values {
@@ -102,11 +103,19 @@ footer {
     text-align: center;
 }
 .btn-primary {
+    border-radius: 15px;
     color: #fff;
     background-color: #B582F7;
     border-color: #8D3FF3;
     width: 200px;
+    transition: all 0.3s ease;
 }
+.btn-primary:hover {
+    background-color: #8D3FF3;
+    border-color: #B582F7;
+    transform: scale(1.1);
+}
+
 .form-group {
     font-family: "Love Ya Like A Sister", cursive;
     color: #002b59;
