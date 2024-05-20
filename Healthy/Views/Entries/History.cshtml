@@ -12,15 +12,16 @@
     var totalCarbs = ateEntries.Sum(item => item.Food.Carbs * item.Quantity);
     var totalProtein = ateEntries.Sum(item => item.Food.Protein * item.Quantity);
 }
-
-<h1>History</h1>
+<div class="head">
+    <h1>History</h1>
+</div>
 
 @foreach (var group in Model.GroupBy(e => e.IntakeTime.Date).OrderByDescending(g => g.Key))
 {
-    <h2>@group.Key.ToString("D")</h2> <!-- Display the date as a heading -->
+    <h2 class="dates">@group.Key.ToString("D")</h2> <!-- Display the date as a heading -->
     <table class="table">
         <thead>
-            <tr>
+            <tr class="table">
                 <th>Food</th>
                 <th>Meal Type</th>
                 <th>Quantity</th>
@@ -38,16 +39,16 @@
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.Food.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.MealType)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Ate)</td>
-                    <td>@(item.Food.Calories * item.Quantity)</td>
-                    <td>@(item.Food.Fat * item.Quantity)</td>
-                    <td>@(item.Food.Carbs * item.Quantity)</td>
-                    <td>@(item.Food.Protein * item.Quantity)</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <td class="values">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td class="values">@Html.DisplayFor(modelItem => item.Ate)</td>
+                    <td class="values">@(item.Food.Calories * item.Quantity)</td>
+                    <td class="values">@(item.Food.Fat * item.Quantity)</td>
+                    <td class="values">@(item.Food.Carbs * item.Quantity)</td>
+                    <td class="values">@(item.Food.Protein * item.Quantity)</td>
+                    <td class="tableButtons">
+                        <b>
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            </b>
                     </td>
                 </tr>
             }
@@ -55,11 +56,11 @@
         <tfoot>
             <tr>
                 <td colspan="4">Totals</td>
-                <td>@totalCalories</td>
-                <td>@totalFats</td>
-                <td>@totalCarbs</td>
-                <td>@totalProtein</td>
-                <td></td>
+                <td class="values">@totalCalories</td>
+                <td class="values">@totalFats</td>
+                <td class="values">@totalCarbs</td>
+                <td class="values">@totalProtein</td>
+                <td class="values"></td>
             </tr>
         </tfoot>
     </table>

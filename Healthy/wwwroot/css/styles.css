@@ -1,5 +1,21 @@
-﻿body {
-    background-color: #F6EE8D;
+﻿header {
+    box-shadow: black 15px 15px inset;
+    font-family: "Love Ya Like A Sister", cursive !important;
+}
+.container-fluid a{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.container-fluid a:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+.navbar-collapse {
+    display: flex;
+    justify-content:space-evenly;
+}
+body {
+    background-image: url('../Assets/Artboard 1.jpg');
 }
 /* HEAD */
 .head {
@@ -8,11 +24,11 @@
     justify-content: space-between;
     align-content: center;
 }
-    .head h1 {
-        font-size: 80px;
-        font-family: "Love Ya Like A Sister", cursive;
-        color: #002b59;
-    }
+.head h1 {
+    font-size: 80px;
+    font-family: "Love Ya Like A Sister", cursive;
+    color: #002b59;
+}
 .createButton a {
     background-color: #B582F7;
     border: 2px solid #422800;
@@ -42,6 +58,11 @@
         padding: 0 25px;
     }
 }
+/* DATES */
+.dates {;
+    font-family: "Love Ya Like A Sister", cursive;
+    color: #002b59;
+}
 /* TABLE */
 .table {
     font-family: "Love Ya Like A Sister", cursive;
@@ -54,9 +75,10 @@
     border-bottom: solid 2px #B582F7;
 }
 .tableButtons a {
+    font-family: "Love Ya Like A Sister", cursive !important;
     display: inline-block;
-    padding-left:10px;
-    padding-right:10px;
+    padding-left: 10px;
+    padding-right: 10px;
     text-decoration: none;
     color: #002b59;
 }
@@ -64,4 +86,13 @@
     transform: scale(1.2);
     transition: all 0.3s ease;
     color: #272727;
+}
+.values {
+    font-family: "Pacifico", cursive;
+}
+/* FOOTER */
+footer {
+    font-family: "Love Ya Like A Sister", cursive !important;
+    text-align: center;
+    color: black;
 }

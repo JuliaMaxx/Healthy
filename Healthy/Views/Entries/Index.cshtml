@@ -59,7 +59,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.MealType)
                 </td>
-                <td>
+                <td class="values">
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
@@ -68,16 +68,16 @@
                         <input type="checkbox" name="ate" value="true" @(item.Ate ? "checked" : "") onchange="document.getElementById('form-@item.Id').submit();" />
                     </form>
                 </td>
-                <td>
+                <td class="values">
                     @(item.Food.Calories * item.Quantity)
                 </td>
-                <td>
+                <td class ="values">
                     @(item.Food.Fat * item.Quantity)
                 </td>
-                <td>
+                <td class="values">
                     @(item.Food.Carbs * item.Quantity)
                 </td>
-                <td>
+                <td class="values">
                     @(item.Food.Protein * item.Quantity)
                 </td>
                 <td class="tableButtons">
@@ -92,13 +92,14 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="4">Totals</td>
-            <td>@totalCalories</td>
-            <td>@totalFats</td>
-            <td>@totalCarbs</td>
-            <td>@totalProtein</td>
-            <td></td>
+            <b>
+                <td colspan="4">Total:</td>
+                <td class="values">@totalCalories</td>
+                <td class="values">@totalFats</td>
+                <td class="values">@totalCarbs</td>
+                <td class="values">@totalProtein</td>
+                <td></td>
+            </b>
         </tr>
     </tfoot>
 </table>
-
