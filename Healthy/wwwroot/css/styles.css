@@ -7,14 +7,23 @@
     padding: 0 15px;
     transition: all 0.3s ease;
 }
-
-.container-fluid a:hover {
-    transform: scale(1.1);
-}
-
 .navbar-collapse {
     display: flex;
     justify-content: space-evenly;
+    align-content: center;
+}
+a.navbar-brand:hover {
+    transform: scale(1.1);
+}
+.nav-item {
+    display: flex;
+    transition: all 0.3s ease;
+}
+.nav-item:hover {
+    transform: scale(1.1);
+}
+.nav-item a {
+    align-self: center;
 }
 
 body {
