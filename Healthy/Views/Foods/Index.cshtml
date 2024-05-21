@@ -41,7 +41,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.OrderBy(f => f.Name))
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
