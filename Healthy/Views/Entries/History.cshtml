@@ -19,7 +19,7 @@
     var totalCarbs = ateEntries.Sum(item => item.Food.Carbs * item.Quantity);
     var totalProtein = ateEntries.Sum(item => item.Food.Protein * item.Quantity);
 
-    <h2 class="dates">@group.Key.ToString("D")</h2> <!-- Display the date as a heading -->
+    <h2 class="dates centered">@group.Key.ToString("D")</h2> <!-- Display the date as a heading -->
     <table class="table">
         <thead>
             <tr class="table">

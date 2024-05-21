@@ -2,6 +2,7 @@ using Healthy.Models;
 using Html;
 using ILogger;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.ProjectModel;
 using System.Diagnostics;
 
 namespace Html
@@ -24,6 +25,20 @@ namespace Html
             return $"<h1>{_content}</h1>";
         }
     }
+    public class HtmlHeader2 : BaseHtmlElement
+    {
+        private string _content;
+
+        public HtmlHeader2(string content)
+        {
+            _content = content;
+        }
+
+        public override string Render()
+        {
+            return $"<h2>{_content}</h2>";
+        }
+    }
     public class HtmlParagraph : BaseHtmlElement
     {
         private string _content;
@@ -38,6 +53,21 @@ namespace Html
             return $"<p>{_content}</p>";
         }
     }
+
+    public class HtmlImage : BaseHtmlElement
+    {
+        private string Src { get; }
+        private string Alt { get; }
+
+        public HtmlImage(string src, string alt)
+        {
+            Src = src;
+            Alt = alt;
+        }
+
+        public override string Render() => $"<img src='{Src}' alt='{Alt}' />";
+    }
+
 }
 
 namespace ILogger
@@ -108,8 +138,27 @@ namespace Healthy.Controllers
             {
                 var elements = new List<BaseHtmlElement>
                 {
-                    new HtmlHeader("Welcome"),
-                    new HtmlParagraph("Learn about <a href='https://learn.microsoft.com/aspnet/core'>building Web apps with ASP.NET Core</a>.")
+                    new HtmlHeader("Welcome to Get Healthy"),
+                    new HtmlParagraph("<a href='' class='saveButton btn-primary'>Try now!</a>"),
+    
+                    // Additional header for the welcome page
+                    new HtmlHeader2("Your Journey to Health Starts Here"),
+    
+                    // Paragraph with a brief introduction
+                    new HtmlParagraph("Discover a new way to improve your health and wellbeing with perso   nalized tips and resources."),
+    
+                    // Image placeholder for a screenshot
+                    new HtmlImage("path/to/screenshot1.png", "Screenshot of the health dashboard"),
+    
+                    // Paragraph with lorem ipsum text for description
+                    new HtmlParagraph("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
+    
+                    // Image placeholder for another screenshot
+                    new HtmlImage("path/to/screenshot2.png", "Screenshot of the tracking features"),
+    
+                    // Another paragraph with lorem ipsum text for description
+                    new HtmlParagraph("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."),
+
                 };
 
                 _loggerService.Log("Rendering Index page.");
