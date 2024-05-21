@@ -11,7 +11,7 @@
 @foreach (var group in Model.GroupBy(e => e.IntakeTime.Date).OrderByDescending(g => g.Key))
 {
     /// Filter entries where Ate checkbox is checked
-    var ateEntries = Model.Where(item => item.Ate);
+    var ateEntries = group.Where(item => item.Ate);
 
     // Calculate totals for the filtered entries
     var totalCalories = ateEntries.Sum(item => item.Food.Calories * item.Quantity);
