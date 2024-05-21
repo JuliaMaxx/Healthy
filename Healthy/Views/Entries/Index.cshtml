@@ -65,7 +65,7 @@
                 <td>
                     <form asp-action="ToggleAte" method="post" id="form-@item.Id">
                         <input type="hidden" name="id" value="@item.Id" />
-                        <input type="checkbox" name="ate" value="true" @(item.Ate ? "checked" : "") onchange="document.getElementById('form-@item.Id').submit();" />
+                        <input class="form-check-input" type="checkbox" name="ate" value="true" @(item.Ate ? "checked" : "") onchange="document.getElementById('form-@item.Id').submit();" />
                     </form>
                 </td>
                 <td class="values">
