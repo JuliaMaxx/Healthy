@@ -42,10 +42,10 @@
                     <td>@Html.DisplayFor(modelItem => item.MealType)</td>
                     <td class="values">@Html.DisplayFor(modelItem => item.Quantity)</td>
                     <td class="values">@Html.DisplayFor(modelItem => item.Ate)</td>
-                    <td class="values">@(item.Food.Calories * item.Quantity)</td>
-                    <td class="values">@(item.Food.Fat * item.Quantity)</td>
-                    <td class="values">@(item.Food.Carbs * item.Quantity)</td>
-                    <td class="values">@(item.Food.Protein * item.Quantity)</td>
+                    <td class="values">@FormatValue(item.Food.Calories * item.Quantity)</td>
+                    <td class="values">@FormatValue(item.Food.Fat * item.Quantity)</td>
+                    <td class="values">@FormatValue(item.Food.Carbs * item.Quantity)</td>
+                    <td class="values">@FormatValue(item.Food.Protein * item.Quantity)</td>
                     <td class="tableButtons">
                     </td>
                 </tr>
@@ -54,12 +54,19 @@
         <tfoot>
             <tr>
                 <td colspan="4">Totals</td>
-                <td class="values">@totalCalories</td>
-                <td class="values">@totalFats</td>
-                <td class="values">@totalCarbs</td>
-                <td class="values">@totalProtein</td>
+                <td class="values">@FormatValue(totalCalories)</td>
+                <td class="values">@FormatValue(totalFats)</td>
+                <td class="values">@FormatValue(totalCarbs)</td>
+                <td class="values">@FormatValue(totalProtein)</td>
                 <td class="values"></td>
             </tr>
         </tfoot>
     </table>
+}
+
+@functions {
+    public string FormatValue(double value)
+    {
+        return value % 1 == 0 ? value.ToString("0") : value.ToString("0.##");
+    }
 }

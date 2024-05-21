@@ -2,6 +2,12 @@
 
 @{
     ViewData["Title"] = "Details";
+    @functions {
+        public string FormatValue(double value)
+        {
+            return value % 1 == 0 ? value.ToString("0") : value.ToString("0.##");
+        }
+    }
 }
 <div class="head">
     <h1>Details</h1>
@@ -26,25 +32,25 @@
             @Html.DisplayNameFor(model => model.Calories)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Calories)
+            @FormatValue(Model.Calories)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Fat)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fat)
+            @FormatValue(Model.Fat)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Carbs)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Carbs)
+            @FormatValue(Model.Carbs)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Protein)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Protein)
+            @FormatValue(Model.Protein)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.User)

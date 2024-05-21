@@ -44,49 +44,49 @@
             Food Calories
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Food.Calories)
+            @FormatValue(Model.Food.Calories)
         </dd>
         <dt class = "col-sm-2">
             Food Fat
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Food.Fat)
+            @FormatValue(Model.Food.Fat)
         </dd>
         <dt class = "col-sm-2">
             Food Carbs
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Food.Carbs)
+            @FormatValue(Model.Food.Carbs)
         </dd>
         <dt class = "col-sm-2">
             Food Protein
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Food.Protein)
+            @FormatValue(Model.Food.Protein)
         </dd>
         <dt class = "col-sm-2">
              Total Calories
         </dt>
         <dd class = "col-sm-10">
-            @(Model.Food.Calories * Model.Quantity)
+            @FormatValue(Model.Food.Calories * Model.Quantity)
         </dd>
         <dt class = "col-sm-2">
              Total Fat
         </dt>
         <dd class = "col-sm-10">
-            @(Model.Food.Fat * Model.Quantity)
+            @FormatValue(Model.Food.Fat * Model.Quantity)
         </dd>
         <dt class = "col-sm-2">
              Total Carbs
         </dt>
         <dd class = "col-sm-10">
-            @(Model.Food.Carbs * Model.Quantity)
+            @FormatValue(Model.Food.Carbs * Model.Quantity)
         </dd>
         <dt class = "col-sm-2">
              Total Protein
         </dt>
         <dd class = "col-sm-10">
-            @(Model.Food.Protein * Model.Quantity)
+            @FormatValue(Model.Food.Protein * Model.Quantity)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IntakeTime)
@@ -100,3 +100,9 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+@functions {
+    public string FormatValue(double value)
+    {
+        return value % 1 == 0 ? value.ToString("0") : value.ToString("0.##");
+    }
+}

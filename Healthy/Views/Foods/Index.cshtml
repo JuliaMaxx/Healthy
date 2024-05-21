@@ -2,6 +2,12 @@
 
 @{
     ViewData["Title"] = "Index";
+    @functions {
+        public string FormatValue(double value)
+        {
+            return value % 1 == 0 ? value.ToString("0") : value.ToString("0.##");
+        }
+    }
 }
 <div class="head">
     <h1>Food</h1>
@@ -44,16 +50,16 @@
                 @Html.DisplayFor(modelItem => item.Reference)
             </td>
             <td class="values">
-                @Html.DisplayFor(modelItem => item.Calories)
+                    @FormatValue(item.Calories)
             </td>
             <td class="values">
-                @Html.DisplayFor(modelItem => item.Fat)
+                    @FormatValue(item.Fat)
             </td>
             <td class="values">
-                @Html.DisplayFor(modelItem => item.Carbs)
+                    @FormatValue(item.Carbs)
             </td>
             <td class="values">
-                @Html.DisplayFor(modelItem => item.Protein)
+                    @FormatValue(item.Protein)
             </td>
                 <td class="tableButtons">
                 <b>
