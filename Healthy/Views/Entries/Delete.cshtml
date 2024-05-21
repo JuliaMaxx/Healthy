@@ -2,6 +2,12 @@
 
 @{
     ViewData["Title"] = "Delete";
+    @functions {
+        public string FormatValue(double value)
+        {
+            return value % 1 == 0 ? value.ToString("0") : value.ToString("0.##");
+        }
+    }
 }
 <div class="head">
     <h1>Delete</h1>
@@ -35,7 +41,7 @@
             @Html.DisplayNameFor(model => model.Quantity)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
+            @FormatValue(Model.Quantity)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Food)

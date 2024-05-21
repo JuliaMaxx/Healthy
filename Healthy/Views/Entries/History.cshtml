@@ -40,7 +40,7 @@
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.Food.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.MealType)</td>
-                    <td class="values">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td class="values">@FormatValue(item.Quantity)</td>
                     <td class="values">@Html.DisplayFor(modelItem => item.Ate)</td>
                     <td class="values">@FormatValue(item.Food.Calories * item.Quantity)</td>
                     <td class="values">@FormatValue(item.Food.Fat * item.Quantity)</td>

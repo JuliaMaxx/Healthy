@@ -60,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.MealType)
                 </td>
                 <td class="values">
-                    @Html.DisplayFor(modelItem => item.Quantity)
+                    @FormatValue(item.Quantity)
                 </td>
                 <td>
                     <form asp-action="ToggleAte" method="post" id="form-@item.Id">
