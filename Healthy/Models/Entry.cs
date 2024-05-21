@@ -15,7 +15,7 @@ namespace Healthy.Models
         public bool Ate { get; set; }
 
         [Range(1, double.MaxValue, ErrorMessage = "Quantity must be a non-negative value.")]
-        public int Quantity { get; set; }
+        public double Quantity { get; set; }
 
         [Required]
         [Display(Name = "Food")]

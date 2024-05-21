@@ -60,25 +60,25 @@
                     @Html.DisplayFor(modelItem => item.MealType)
                 </td>
                 <td class="values">
-                    @Html.DisplayFor(modelItem => item.Quantity)
+                    @FormatValue(item.Quantity)
                 </td>
                 <td>
                     <form asp-action="ToggleAte" method="post" id="form-@item.Id">
                         <input type="hidden" name="id" value="@item.Id" />
-                        <input type="checkbox" name="ate" value="true" @(item.Ate ? "checked" : "") onchange="document.getElementById('form-@item.Id').submit();" />
+                        <input class="form-check-input" type="checkbox" name="ate" value="true" @(item.Ate ? "checked" : "") onchange="document.getElementById('form-@item.Id').submit();" />
                     </form>
                 </td>
                 <td class="values">
-                    @(item.Food.Calories * item.Quantity)
+                    @FormatValue(item.Food.Calories * item.Quantity)
                 </td>
                 <td class ="values">
-                    @(item.Food.Fat * item.Quantity)
+                    @FormatValue(item.Food.Fat * item.Quantity)
                 </td>
                 <td class="values">
-                    @(item.Food.Carbs * item.Quantity)
+                    @FormatValue(item.Food.Carbs * item.Quantity)
                 </td>
                 <td class="values">
-                    @(item.Food.Protein * item.Quantity)
+                    @FormatValue(item.Food.Protein * item.Quantity)
                 </td>
                 <td class="tableButtons">
                     <b>
@@ -94,12 +94,19 @@
         <tr>
             <b>
                 <td colspan="4">Total:</td>
-                <td class="values">@totalCalories</td>
-                <td class="values">@totalFats</td>
-                <td class="values">@totalCarbs</td>
-                <td class="values">@totalProtein</td>
+            <td class="values">@FormatValue(totalCalories)</td>
+            <td class="values">@FormatValue(totalFats)</td>
+            <td class="values">@FormatValue(totalProtein)</td>
+            <td class="values">@FormatValue(totalCarbs)</td>
                 <td></td>
             </b>
         </tr>
     </tfoot>
 </table>
+
+@functions {
+    public string FormatValue(double value)
+    {
+        return value % 1 == 0 ? value.ToString("0") : value.ToString("0.##");
+    }
+}
