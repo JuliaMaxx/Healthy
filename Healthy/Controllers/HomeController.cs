@@ -139,7 +139,7 @@ namespace Healthy.Controllers
                 var elements = new List<BaseHtmlElement>
                 {
                     new HtmlHeader("Welcome to Get Healthy"),
-                    new HtmlParagraph("<br><a href='' class='saveButton btn-primary'>Try now for FREE!</a>"),
+                    new HtmlParagraph("<br><a href='Identity/Account/Register' class='saveButton btn-primary homeBtn'>Try now for FREE!</a>"),
     
                     // Additional header for the welcome page
                     new HtmlHeader2("Your Journey to Health Starts Here"),
