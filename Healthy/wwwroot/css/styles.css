@@ -216,5 +216,91 @@ body {
     display: none;
 }
 
-/* ADMIN PANEL */
+/* HOME PAGE */
+.text-center{
+    margin-top: 50px;
+}
+.text-center {
+    text-align: justify;
+}
 
+.homepageImages {
+    width: 560px;
+    box-shadow: rgba(0,0,0,0.75) 4px 4px 10px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.homepageImages:hover {
+    transform: scale(1.1);
+    box-shadow: rgba(0,0,0,0.75) 4px 4px 15px;
+}
+.todayDatabase {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+    text-shadow: rgba(0,0,0,0.1) 2px 2px 5px;
+    display: inline-flex;
+    padding-top: 25px;
+    max-width: 50%;
+    align-self: center;
+    text-align: justify;
+}
+.foodDatabase{
+    padding: 25px;
+    display: flex;
+}
+.foodDatabase p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+    text-align: justify;
+    align-self: center;
+    text-shadow: rgba(0,0,0,0.1) 2px 2px 5px;
+    max-width: 700px;
+    padding-left: 50px;
+}
+.foodDatabase img {
+    width: 560px;
+    box-shadow: rgba(0,0,0,0.75) 4px 4px 10px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+.foodDatabase img:hover {
+    transform: scale(1.1);
+    box-shadow: rgba(0,0,0,0.75) 4px 4px 15px;
+}
+
+/* NEWSLETTER */
+.newsletter {
+    padding: 20px;
+}
+
+/* Style the input elements and the submit button */
+input[type=text], input[type=submit] {
+    width: 25%;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+/* Style the submit button */
+input[type=submit] {
+    background-color: #B582F7;
+    color: white;
+    border: none;
+    border-radius: 15px;
+}
+
+input[type=submit]:hover {
+    opacity: 0.8;
+}
+
+.newsletterBox {
+    text-align: center;
+
+}
+.newsletter input{
+    padding-top: 15px;
+    text-align: center;
+}
+.submit {
+    margin-top: 10px;
+}
