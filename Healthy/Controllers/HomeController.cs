@@ -50,7 +50,7 @@ namespace Html
 
         public override string Render()
         {
-            return $"<p>{_content}</p>";
+            return $"<p class='todayDatabase'>{_content}</p>";
         }
     }
 
@@ -65,7 +65,7 @@ namespace Html
             Alt = alt;
         }
 
-        public override string Render() => $"<img src='{Src}' alt='{Alt}' />";
+        public override string Render() => $"<div class'todayDatabase'>'<img src='{Src}' alt='{Alt}' class='homepageImages'/></div>";
     }
 
 }
@@ -139,26 +139,16 @@ namespace Healthy.Controllers
                 var elements = new List<BaseHtmlElement>
                 {
                     new HtmlHeader("Welcome to Get Healthy"),
-                    new HtmlParagraph("<a href='' class='saveButton btn-primary'>Try now!</a>"),
+                    new HtmlParagraph("<br><a href='' class='saveButton btn-primary'>Try now for FREE!</a>"),
     
                     // Additional header for the welcome page
                     new HtmlHeader2("Your Journey to Health Starts Here"),
     
-                    // Paragraph with a brief introduction
-                    new HtmlParagraph("Discover a new way to improve your health and wellbeing with perso   nalized tips and resources."),
-    
                     // Image placeholder for a screenshot
-                    new HtmlImage("path/to/screenshot1.png", "Screenshot of the health dashboard"),
+                    new HtmlImage("../../Assets/todayDatabase.png", "Screenshot of the health dashboard"),
     
-                    // Paragraph with lorem ipsum text for description
-                    new HtmlParagraph("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-    
-                    // Image placeholder for another screenshot
-                    new HtmlImage("path/to/screenshot2.png", "Screenshot of the tracking features"),
-    
-                    // Another paragraph with lorem ipsum text for description
-                    new HtmlParagraph("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."),
-
+                    // Paragraph with a brief introduction
+                    new HtmlParagraph("Discover a revolutionary approach to enhancing your health and wellbeing with our comprehensive, personalized tips and resources. Tailored specifically to your unique needs and lifestyle, our guidance will empower you to make informed decisions, adopt healthier habits, and achieve your wellness goals."),
                 };
 
                 _loggerService.Log("Rendering Index page.");
