@@ -304,3 +304,8 @@ input[type=submit]:hover {
 .submit {
     margin-top: 10px;
 }
+
+.homeBtn {
+    margin-bottom: 16px;
+    text-decoration: none;
+}
